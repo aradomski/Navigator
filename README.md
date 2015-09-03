@@ -251,11 +251,11 @@ public class ActivityWithResultOption extends BaseActivity {
     }
 ```
 ```java
- Navigator.activityWithResultOptionFirstGroupForResult(BaseActivity.this, "abcdefgh", true, WITH_RESULT_OPTION_ACTIVITY);
-    ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
+Navigator.activityWithResultOptionFirstGroupForResult(BaseActivity.this, "abcdefgh", true, WITH_RESULT_OPTION_ACTIVITY);
+ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
 ```
 ```java
-  Navigator.activityWithResultOptionSecondGroup(BaseActivity.this, 123.53, 25);
+Navigator.activityWithResultOptionSecondGroup(BaseActivity.this, 123.53, 25);
 ```
 
 ### Create group of activities
