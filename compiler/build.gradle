@@ -23,26 +23,36 @@ apply plugin: 'java'
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
 
+String getAndroidJarPath() {
+    def rootDir = project.rootDir
+    def localProperties = new File(rootDir, "local.properties")
 
-def rootDir = project.rootDir
-def localProperties = new File(rootDir, "local.properties")
-def androidJarPath= ".";
-if (localProperties.exists()) {
-    Properties properties = new Properties()
-    localProperties.withInputStream { instr ->
-        properties.load(instr)
+    if (localProperties.exists()) {
+        Properties properties = new Properties()
+        localProperties.withInputStream { instr ->
+            properties.load(instr)
+        }
+        def sdkDir = properties.getProperty('sdk.dir')
+        def minSdkVersion = 15
+        def maxSdkVersion = 23
+        File sdkFile = null;
+        for (int i = maxSdkVersion; i >= minSdkVersion; i--) {
+            sdkFile = new File(sdkDir + "/platforms/" + "android-" + i + "/android.jar")
+            if (sdkFile.exists()) {
+                break;
+            }
+        }
+        def androidJarPath = sdkFile.absolutePath;
+        print androidJarPath + "\n"
+        return androidJarPath;
     }
-    def sdkDir = properties.getProperty('sdk.dir')
-    androidJarPath = sdkDir + "/platforms/" + "android-22" + "/android.jar"
-    print androidJarPath + "\n"
 }
 
-
 dependencies {
-    compile project (':navigator')
+    compile project(':navigator')
     compile 'com.google.auto.service:auto-service:1.0-rc2'
     compile 'com.squareup:javapoet:1.2.0'
-   compile fileTree(dir: androidJarPath, include: ['*.jar'])
+    compile fileTree(dir: getAndroidJarPath(), include: ['*.jar'])
 }
 
 
