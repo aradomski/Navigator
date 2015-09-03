@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Navigator
   ~ Copyright (C)  2015 Adam Radomski
   ~
@@ -44,6 +43,7 @@
         <activity android:name=".examples.GroupedParamsForResultActivity" />
         <activity android:name=".examples.AllParamsActivity" />
         <activity android:name=".examples.GroupedActivity" />
+        <activity android:name=".examples.ActivityWithResultOption" />
     </application>
 
 </manifest>

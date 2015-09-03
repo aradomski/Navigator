@@ -131,6 +131,18 @@
             android:text="Grouped Activity" />
 
         <Button
+            android:id="@+id/with_result_option_activity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="With result option Activity 1" />
+
+        <Button
+            android:id="@+id/with_result_option_activity2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="With result option Activity 2" />
+
+        <Button
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

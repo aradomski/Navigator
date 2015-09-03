@@ -43,6 +43,7 @@ public class BaseActivity extends Activity {
     public static final int GROUPED_RESULTS_FOR_RESULT_ACTIVITY1 = 5005;
     public static final int GROUPED_RESULTS_FOR_RESULT_ACTIVITY2 = 5006;
     public static final int GROUPED_RESULTS_FOR_RESULT_ACTIVITY3 = 5007;
+    public static final int WITH_RESULT_OPTION_ACTIVITY = 5008;
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -94,6 +95,12 @@ public class BaseActivity extends Activity {
                 case R.id.grouped_activity:
                     Navigator.subgroup.groupedActivity(BaseActivity.this);
                     break;
+                case R.id.with_result_option_activity1:
+                    Navigator.activityWithResultOptionFirstGroupForResult(BaseActivity.this, "abcdefgh", true, WITH_RESULT_OPTION_ACTIVITY);
+                    break;
+                case R.id.with_result_option_activity2:
+                    Navigator.activityWithResultOptionSecondGroup(BaseActivity.this, 123.53, 25);
+                    break;
             }
         }
     };
@@ -115,6 +122,8 @@ public class BaseActivity extends Activity {
     private Button groupedResultsActivity3;
     private Button allParamsActivity;
     private Button groupedActivity;
+    private Button withResultOption1;
+    private Button withResultOption2;
 
 
     @Override
@@ -170,6 +179,13 @@ public class BaseActivity extends Activity {
         groupedActivity = (Button) findViewById(R.id.grouped_activity);
         groupedActivity.setOnClickListener(onClickListener);
 
+
+        withResultOption1 = (Button) findViewById(R.id.with_result_option_activity1);
+        withResultOption1.setOnClickListener(onClickListener);
+
+        withResultOption2 = (Button) findViewById(R.id.with_result_option_activity2);
+        withResultOption2.setOnClickListener(onClickListener);
+
     }
 
     protected View.OnClickListener getOnCloseClickListener() {
@@ -208,6 +224,10 @@ public class BaseActivity extends Activity {
             case GROUPED_RESULTS_FOR_RESULT_ACTIVITY3:
                 GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivitySecondGroupResult result7 = GroupedResultsForResultActivityResultLoader.loadSecondGroup(data);
                 textViewResult.setText(result7.integerResult + "\n" + result7.doubleResult);
+                break;
+            case WITH_RESULT_OPTION_ACTIVITY:
+                ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
+                textViewResult.setText(result8.stringResult + "\n" + result8.bookResult);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
