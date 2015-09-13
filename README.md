@@ -202,6 +202,61 @@ public class GroupedResultsForResultActivity extends BaseActivity {
  GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivitySecondGroupResult result7 = GroupedResultsForResultActivityResultLoader.loadSecondGroup(data);
 ```
 
+### Create Activity that could be run for result or not.
+```java
+@Navigable
+public class ActivityWithResultOption extends BaseActivity {
+    @Param(group = "firstGroup", forResult = true)
+    String stringParam;
+    @Param(group = "firstGroup", forResult = true)
+    Boolean booleanParam;
+    @Param(group = "secondGroup")
+    Double doubleParam;
+    @Param(group = "secondGroup")
+    Integer integerParam;
+
+
+    @Result(group = "firstResultGroup")
+    String stringResult = "abcdefghijk";
+    @Result(group = "firstResultGroup")
+    Book bookResult;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        bookResult = new Book();
+        bookResult.setAuthor(ForResultActivity.class.getSimpleName());
+        bookResult.setPublishTime(2012);
+        bookResult.setBookName("Result");
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(this.getClass().getCanonicalName());
+        stringBuilder.append("\n");
+        stringBuilder.append(toString());
+        classInfo.setText(stringBuilder);
+
+
+    }
+
+    @Override
+    protected View.OnClickListener getOnCloseClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = ActivityWithResultOptionResultFiller.fillResultfirstResultGroup(ActivityWithResultOption.this);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        };
+    }
+```
+```java
+Navigator.activityWithResultOptionFirstGroupForResult(BaseActivity.this, "abcdefgh", true, WITH_RESULT_OPTION_ACTIVITY);
+ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
+```
+```java
+Navigator.activityWithResultOptionSecondGroup(BaseActivity.this, 123.53, 25);
+```
 
 ### Create group of activities
 ```java
