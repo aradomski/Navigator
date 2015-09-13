@@ -21,12 +21,15 @@
 package pl.edu.radomski.navigator;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
  * Created by adam on 8/18/15.
  */
 @Target(value = ElementType.FIELD)
+@Retention(RetentionPolicy.SOURCE)
 public @interface Param {
     String group() default "";
 

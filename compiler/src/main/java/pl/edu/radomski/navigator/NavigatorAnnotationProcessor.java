@@ -20,7 +20,6 @@
 
 package pl.edu.radomski.navigator;
 
-import com.google.auto.service.AutoService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +30,6 @@ import java.util.Set;
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.SourceVersion;
@@ -50,7 +48,6 @@ import static javax.tools.Diagnostic.Kind.NOTE;
 /**
  * Created by adam on 8/18/15.
  */
-@AutoService(Processor.class)
 @SupportedAnnotationTypes({"pl.edu.radomski.navigator.Param", "pl.edu.radomski.navigator.Result", "pl.edu.radomski.navigator.Navigable"})
 public class NavigatorAnnotationProcessor extends AbstractProcessor {
 

@@ -44,5 +44,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile project(':navigator')
-    apt project(':compiler')
+    compile project(':compiler')
+}
+apt {
+    processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
 }
