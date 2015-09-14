@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
  */
 @Target(value = ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
+
 public @interface Navigable {
     String group() default "";
 }
