@@ -10,7 +10,7 @@ Navigator code generator for Android.
 Crucial lines:
 ```
 apply plugin: 'com.neenbedankt.android-apt'
-compile project(':compiler')
+provided project(':compiler')
 apt {
   processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
 }
