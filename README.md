@@ -3,6 +3,27 @@ Navigator code generator for Android.
 
 ##I want to:
 
+### Include library in my project
+
+[App build.gradle](app/build.gradle)
+
+Crucial lines:
+```
+apply plugin: 'com.neenbedankt.android-apt'
+compile project(':compiler')
+apt {
+  processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
+}
+```
+[Project build.gradle](build.gradle)
+
+Crucial line:
+```
+classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
+```
+
+
+
 ### Navigate to simple activity
 
 ```java
