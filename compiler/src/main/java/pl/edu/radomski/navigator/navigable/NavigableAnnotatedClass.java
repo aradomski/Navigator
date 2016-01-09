@@ -28,8 +28,8 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
-import pl.edu.radomski.navigator.AnnotationValidator;
-import pl.edu.radomski.navigator.CollectionUtils;
+import pl.edu.radomski.navigator.utils.AnnotationValidator;
+import pl.edu.radomski.navigator.utils.CollectionUtils;
 import pl.edu.radomski.navigator.Navigable;
 import pl.edu.radomski.navigator.Param;
 import pl.edu.radomski.navigator.Result;

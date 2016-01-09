@@ -20,7 +20,6 @@
 
 package pl.edu.radomski.navigator;
 
-import android.content.Intent;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -36,6 +35,8 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.VariableElement;
 
 import pl.edu.radomski.navigator.navigable.NavigableAnnotatedClass;
+import pl.edu.radomski.navigator.utils.AndroidSpecificClassProvider;
+import pl.edu.radomski.navigator.utils.CodeGeneratorHelper;
 
 import static com.squareup.javapoet.JavaFile.builder;
 
@@ -53,7 +54,7 @@ public class ParamLoaderCodeGenerator {
 
     public void createParamLoader(NavigableAnnotatedClass value) {
         TypeSpec.Builder builder = TypeSpec.classBuilder(value.getAnnotatedClassName() + "ParamLoader").addModifiers(Modifier.FINAL);
-        TypeName intentTypeName = ClassName.get(Intent.class);
+        TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
 
         String qualifiedName = value.getTypeElement().getQualifiedName().toString();
         String activityPackage = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));

@@ -21,6 +21,12 @@
 package pl.edu.radomski.navigator;
 
 
+import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.TypeName;
+import com.squareup.javapoet.TypeSpec;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,13 +40,17 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
 import javax.tools.Diagnostic;
 
-import pl.edu.radomski.navigator.exceptions.VariableElementValidationException;
+import pl.edu.radomski.navigator.exceptions.*;
 import pl.edu.radomski.navigator.navigable.NavigableAnnotatedClass;
 import pl.edu.radomski.navigator.navigable.NavigableAnnotationValidator;
+import pl.edu.radomski.navigator.utils.CollectionUtils;
 
+import static com.squareup.javapoet.JavaFile.builder;
 import static java.util.Collections.singleton;
 import static javax.lang.model.SourceVersion.latestSupported;
 import static javax.tools.Diagnostic.Kind.NOTE;
@@ -138,6 +148,31 @@ public class NavigatorAnnotationProcessor extends AbstractProcessor {
         navigatorCodeGenerator.generateClass(elementFromMapWithList);
 
 
+        // Subclass test after update from javapoet 1.2 to 1.4
+//        String packageName = "com.example";
+//        String aClassName = "A";
+//
+//        TypeSpec.Builder bClassBuilder = TypeSpec.classBuilder("B")
+//                .addModifiers(Modifier.FINAL, Modifier.PUBLIC, Modifier.STATIC);
+//
+//        TypeSpec bClassTypeSpec = bClassBuilder.build();
+//
+//        MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder("getB");
+//        methodBuilder.addModifiers(Modifier.STATIC, Modifier.PUBLIC);
+//        methodBuilder.addCode("return new B();\n");
+//        methodBuilder.returns(ClassName.get(packageName + "." + aClassName, bClassTypeSpec.name));
+//
+//        TypeSpec.Builder aClassBuilder = TypeSpec.classBuilder(aClassName).addModifiers(Modifier.FINAL, Modifier.PUBLIC);
+//        aClassBuilder.addType(bClassTypeSpec);
+//        aClassBuilder.addMethod(methodBuilder.build());
+//
+//        JavaFile javaFile;
+//        javaFile = builder(packageName, aClassBuilder.build()).build();
+//        try {
+//            javaFile.writeTo(processingEnv.getFiler());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }
 

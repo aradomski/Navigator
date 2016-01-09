@@ -20,7 +20,6 @@
 
 package pl.edu.radomski.navigator;
 
-import android.content.Intent;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -37,6 +36,8 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.VariableElement;
 
 import pl.edu.radomski.navigator.navigable.NavigableAnnotatedClass;
+import pl.edu.radomski.navigator.utils.AndroidSpecificClassProvider;
+import pl.edu.radomski.navigator.utils.CodeGeneratorHelper;
 
 import static com.squareup.javapoet.JavaFile.builder;
 
@@ -54,8 +55,9 @@ public class ResultLoaderCodeGenerator {
     }
 
     public void createResultLoader(NavigableAnnotatedClass value) {
-        TypeSpec.Builder builder = TypeSpec.classBuilder(value.getAnnotatedClassName() + "ResultLoader").addModifiers(Modifier.FINAL, Modifier.PUBLIC);
-        TypeName intentTypeName = ClassName.get(Intent.class);
+        String resultLoaderClassName = value.getAnnotatedClassName() + "ResultLoader";
+        TypeSpec.Builder builder = TypeSpec.classBuilder(resultLoaderClassName).addModifiers(Modifier.FINAL, Modifier.PUBLIC);
+        TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
 
         String qualifiedName = value.getTypeElement().getQualifiedName().toString();
         String activityPackage = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
@@ -81,6 +83,7 @@ public class ResultLoaderCodeGenerator {
             loadBuilder.addModifiers(Modifier.STATIC, Modifier.PUBLIC);
 
             loadBuilder.addParameter(intentTypeName, "intent", Modifier.FINAL);
+
             loadBuilder.addCode(resultClass.name + " result =new " + resultClass.name + "();\n");
 
             for (VariableElement variableElement : variableElements) {
@@ -220,7 +223,7 @@ public class ResultLoaderCodeGenerator {
                 loadLine = new StringBuilder();
             }
             loadBuilder.addCode("return result;\n");
-            loadBuilder.returns(ClassName.get(activityPackage, resultClass.name));
+            loadBuilder.returns(ClassName.get(activityPackage + "." + resultLoaderClassName, resultClass.name));
 
             builder.addMethod(loadBuilder.build());
         }
@@ -244,7 +247,6 @@ public class ResultLoaderCodeGenerator {
         for (VariableElement variableElement : variableElements) {
             resultClassBuilder.addField(TypeName.get(variableElement.asType()), variableElement.getSimpleName().toString(), Modifier.PUBLIC);
         }
-
 
         return resultClassBuilder.build();
     }

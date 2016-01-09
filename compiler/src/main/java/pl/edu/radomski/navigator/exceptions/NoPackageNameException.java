@@ -18,31 +18,13 @@
  * USA
  */
 
-package pl.edu.radomski.navigator;
+package pl.edu.radomski.navigator.exceptions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import javax.lang.model.element.TypeElement;
 
-/**
- * Created by adam on 8/19/15.
- */
-public class CollectionUtils {
+public class NoPackageNameException extends Exception {
 
-
-    public static <K, E> void addToHashMapWithList(Map<K, List<E>> map, K key, E element) {
-        if (map.get(key) == null) {
-            map.put(key, new ArrayList<E>());
-        }
-        map.get(key).add(element);
-    }
-
-    public static <K, E> List<E> getElementFromMapWithList(Map<K, List<E>> map) {
-        ArrayList<E> list = new ArrayList<>();
-        for (List<E> element : map.values()) {
-            list.addAll(element);
-        }
-        return list;
-    }
-
+  public NoPackageNameException(TypeElement typeElement) {
+    super("The package of " + typeElement.getSimpleName() + " has no name");
+  }
 }

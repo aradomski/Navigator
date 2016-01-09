@@ -18,7 +18,7 @@
  * USA
  */
 
-package pl.edu.radomski.navigator;
+package pl.edu.radomski.navigator.utils;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
@@ -28,14 +28,14 @@ import javax.lang.model.type.TypeMirror;
  * Created by adam on 8/23/15.
  */
 public class CodeGeneratorHelper {
-    static String buildMethodName(String annotatedClassName) {
+    public static String buildMethodName(String annotatedClassName) {
         char c[] = annotatedClassName.toCharArray();
         c[0] = Character.toLowerCase(c[0]);
         annotatedClassName = new String(c);
         return annotatedClassName;
     }
 
-    static String firstLetterToUpperCase(String name) {
+    public static String firstLetterToUpperCase(String name) {
         if (name.trim().length() == 0) {
             return name;
         }
@@ -45,7 +45,7 @@ public class CodeGeneratorHelper {
         return name;
     }
 
-    static boolean checkIfIsParcelable(ProcessingEnvironment processingEnvironment, String type) {
+    public static boolean checkIfIsParcelable(ProcessingEnvironment processingEnvironment, String type) {
         TypeElement parcelableElement = processingEnvironment.getElementUtils().getTypeElement("android.os.Parcelable");
         TypeElement elementType;
         if (type.contains("<") && type.contains(">")) {
@@ -63,7 +63,7 @@ public class CodeGeneratorHelper {
         return false;
     }
 
-    static boolean checkIfIsSerializable(ProcessingEnvironment processingEnvironment, String type) {
+    public static boolean checkIfIsSerializable(ProcessingEnvironment processingEnvironment, String type) {
         if (type.equals("java.lang.String") || type.equals("java.lang.Boolean") || type.equals("java.lang.Character")) {
             //it is serializable but we handle it different way
             return false;

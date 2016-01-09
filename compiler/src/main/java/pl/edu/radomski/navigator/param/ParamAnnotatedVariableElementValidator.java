@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import javax.lang.model.element.VariableElement;
 
-import pl.edu.radomski.navigator.AnnotationValidator;
+import pl.edu.radomski.navigator.utils.AnnotationValidator;
 import pl.edu.radomski.navigator.Param;
 
 /**

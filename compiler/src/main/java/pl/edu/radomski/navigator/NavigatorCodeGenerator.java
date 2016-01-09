@@ -20,9 +20,6 @@
 
 package pl.edu.radomski.navigator;
 
-import android.app.Activity;
-import android.content.Intent;
-
 import com.squareup.javapoet.ArrayTypeName;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -32,22 +29,23 @@ import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.VariableElement;
 
+import pl.edu.radomski.navigator.exceptions.NoPackageNameException;
+import pl.edu.radomski.navigator.exceptions.NotAllFieldsAreAnnotatedForResultException;
 import pl.edu.radomski.navigator.navigable.NavigableAnnotatedClass;
+import pl.edu.radomski.navigator.utils.AndroidSpecificClassProvider;
+import pl.edu.radomski.navigator.utils.CodeGeneratorHelper;
+import pl.edu.radomski.navigator.utils.Utils;
 
 import static com.squareup.javapoet.JavaFile.builder;
 
-final class NavigatorCodeGenerator {
+class NavigatorCodeGenerator {
     private static final String CLASS_NAME = "Navigator";
     private static HashMap<String, TypeSpec.Builder> builderForInnerClass = new HashMap<>();
     private ProcessingEnvironment processingEnv;
@@ -84,7 +82,7 @@ final class NavigatorCodeGenerator {
         javaFile.writeTo(processingEnv.getFiler());
     }
 
-    private List<MethodSpec> createMethod(NavigableAnnotatedClass value) {
+    List<MethodSpec> createMethod(NavigableAnnotatedClass value) {
         ArrayList<MethodSpec> methods = new ArrayList<>();
 
         if (value.getParamAnnotatedFields().size() == 0 && value.getResultAnnotatedFields().size() == 0) {
@@ -112,9 +110,9 @@ final class NavigatorCodeGenerator {
         return methods;
     }
 
-    private MethodSpec handleResultActivity(NavigableAnnotatedClass value) {
-        TypeName activityTypeName = ClassName.get(Activity.class);
-        TypeName intentTypeName = ClassName.get(Intent.class);
+    MethodSpec handleResultActivity(NavigableAnnotatedClass value) {
+        TypeName activityTypeName = AndroidSpecificClassProvider.getActivityTypeName();
+        TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
         String activityQualifiedName = value.getTypeElement().getQualifiedName().toString();
         ArrayTypeName integerArray = ArrayTypeName.of(ClassName.get(Integer.class));
 
@@ -134,9 +132,9 @@ final class NavigatorCodeGenerator {
         return builder.build();
     }
 
-    private MethodSpec handleParamActivity(String group, NavigableAnnotatedClass value) {
-        TypeName activityTypeName = ClassName.get(Activity.class);
-        TypeName intentTypeName = ClassName.get(Intent.class);
+    MethodSpec handleParamActivity(String group, NavigableAnnotatedClass value) {
+        TypeName activityTypeName = AndroidSpecificClassProvider.getActivityTypeName();
+        TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
         String activityQualifiedName = value.getTypeElement().getQualifiedName().toString();
         ArrayTypeName integerArray = ArrayTypeName.of(ClassName.get(Integer.class));
 
@@ -147,7 +145,7 @@ final class NavigatorCodeGenerator {
             }
         }
 
-        String methodName = value.getAnnotatedClassName()+CodeGeneratorHelper.firstLetterToUpperCase(group);
+        String methodName = value.getAnnotatedClassName() + CodeGeneratorHelper.firstLetterToUpperCase(group);
         if (forResultCounter > 0) {
             methodName += "ForResult";
         }
@@ -157,12 +155,12 @@ final class NavigatorCodeGenerator {
         TypeName paramTypeName;
         System.out.println(value.getParamAnnotatedFields() + "   group: " + group);
         for (VariableElement param : value.getParamAnnotatedFields().get(group)) {
-            paramTypeName = TypeName.get(param.asType());
+            paramTypeName = getTypeName(param);
             builder.addParameter(paramTypeName, param.getSimpleName().toString(), Modifier.FINAL);
         }
 
         if (forResultCounter > 0 && (forResultCounter != value.getParamAnnotatedFields().get(group).size())) {
-            throw new RuntimeException("When at least one param is marked as \"forResult\" each element of this group should be marked as \"forResult\"");
+            throw new NotAllFieldsAreAnnotatedForResultException("When at least one param is marked as \"forResult\" each element of this group should be marked as \"forResult\"");
         }
 
 
@@ -190,10 +188,14 @@ final class NavigatorCodeGenerator {
         return builder.build();
     }
 
+    TypeName getTypeName(VariableElement param) {
+        return TypeName.get(param.asType());
+    }
 
-    private static MethodSpec handleNoParamNoResultActivity(NavigableAnnotatedClass value) {
-        TypeName activityTypeName = ClassName.get(Activity.class);
-        TypeName intentTypeName = ClassName.get(Intent.class);
+
+    MethodSpec handleNoParamNoResultActivity(NavigableAnnotatedClass value) {
+        TypeName activityTypeName = AndroidSpecificClassProvider.getActivityTypeName();
+        TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
         String activityQualifiedName = value.getTypeElement().getQualifiedName().toString();
         ArrayTypeName integerArray = ArrayTypeName.of(ClassName.get(Integer.class));
 

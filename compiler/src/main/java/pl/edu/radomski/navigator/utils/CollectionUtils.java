@@ -18,24 +18,31 @@
  * USA
  */
 
-package pl.edu.radomski.navigator;
+package pl.edu.radomski.navigator.utils;
 
-import javax.lang.model.element.PackageElement;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.util.Elements;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-final class Utils {
+/**
+ * Created by adam on 8/19/15.
+ */
+public class CollectionUtils {
 
-    private Utils() {
-        // no instances
-    }
 
-    static String getPackageName(Elements elementUtils, TypeElement type)
-            throws NoPackageNameException {
-        PackageElement pkg = elementUtils.getPackageOf(type);
-        if (pkg.isUnnamed()) {
-            throw new NoPackageNameException(type);
+    public static <K, E> void addToHashMapWithList(Map<K, List<E>> map, K key, E element) {
+        if (map.get(key) == null) {
+            map.put(key, new ArrayList<E>());
         }
-        return pkg.getQualifiedName().toString();
+        map.get(key).add(element);
     }
+
+    public static <K, E> List<E> getElementFromMapWithList(Map<K, List<E>> map) {
+        ArrayList<E> list = new ArrayList<>();
+        for (List<E> element : map.values()) {
+            list.addAll(element);
+        }
+        return list;
+    }
+
 }

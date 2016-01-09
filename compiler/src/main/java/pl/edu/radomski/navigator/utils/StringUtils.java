@@ -18,7 +18,7 @@
  * USA
  */
 
-package pl.edu.radomski.navigator;
+package pl.edu.radomski.navigator.utils;
 
 /**
  * Created by adam on 8/25/15.

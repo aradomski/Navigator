@@ -20,7 +20,6 @@
 
 package pl.edu.radomski.navigator;
 
-import android.content.Intent;
 
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -50,13 +49,14 @@ public class ResultFillerCodeGenerator {
 
     public void createResultFiller(NavigableAnnotatedClass value) {
         TypeSpec.Builder builder = TypeSpec.classBuilder(value.getAnnotatedClassName() + "ResultFiller").addModifiers(Modifier.FINAL);
-        TypeName intentTypeName = ClassName.get(Intent.class);
+
+        TypeName intentTypeName = pl.edu.radomski.navigator.utils.AndroidSpecificClassProvider.getIntentTypeName();
+
         String qualifiedName = value.getTypeElement().getQualifiedName().toString();
         String activityPackage = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
 
 
         TypeName typeName = ClassName.get(activityPackage, value.getAnnotatedClassName());
-
 
 
         MethodSpec.Builder fillBuilder;
@@ -65,7 +65,7 @@ public class ResultFillerCodeGenerator {
         for (String groups : value.getResultAnnotatedFields().keySet()) {
             fillBuilder = MethodSpec.methodBuilder("fillResult" + groups);
             fillBuilder.addModifiers(Modifier.STATIC);
-            fillBuilder.addParameter(typeName,"activity", Modifier.FINAL);
+            fillBuilder.addParameter(typeName, "activity", Modifier.FINAL);
             fillBuilder.returns(intentTypeName);
             fillBuilder.addCode("$T intent = new $T();\n", intentTypeName, intentTypeName);
             for (VariableElement variableElement : value.getResultAnnotatedFields().get(groups)) {

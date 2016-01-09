@@ -18,13 +18,24 @@
  * USA
  */
 
-package pl.edu.radomski.navigator;
+package pl.edu.radomski.navigator.utils;
 
+import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.util.Elements;
 
-class NoPackageNameException extends Exception {
+public final class Utils {
 
-  public NoPackageNameException(TypeElement typeElement) {
-    super("The package of " + typeElement.getSimpleName() + " has no name");
-  }
+    private Utils() {
+        // no instances
+    }
+
+    public static String getPackageName(Elements elementUtils, TypeElement type)
+            throws pl.edu.radomski.navigator.exceptions.NoPackageNameException {
+        PackageElement pkg = elementUtils.getPackageOf(type);
+        if (pkg.isUnnamed()) {
+            throw new pl.edu.radomski.navigator.exceptions.NoPackageNameException(type);
+        }
+        return pkg.getQualifiedName().toString();
+    }
 }

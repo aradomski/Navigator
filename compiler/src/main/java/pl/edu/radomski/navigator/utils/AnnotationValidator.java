@@ -18,7 +18,7 @@
  * USA
  */
 
-package pl.edu.radomski.navigator;
+package pl.edu.radomski.navigator.utils;
 
 
 import javax.lang.model.element.Element;
