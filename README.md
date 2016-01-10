@@ -288,4 +288,56 @@ public class GroupedActivity extends Activity
 ```java
 Navigator.subgroup.groupedActivity(BaseActivity.this);
 ```
+### Create custom method and support classes name for Activity
+
+```java
+@Navigable(name = "customNameWithParams")
+public class NamedParamsAndResultActivity extends BaseActivity {
+
+    @Param(forResult = true)
+    Integer integerParam;
+    @Param(forResult = true)
+    String stringParam;
+    @Param(group = "OtherGroup")
+    Book parcelableParam;
+
+    @Result
+    String stringResult = "result";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        CustomNameWithParamsParamLoader.load(this);
+    }
+
+    @Override
+    protected View.OnClickListener getOnCloseClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CustomNameWithParamsResultFiller.fillResult(NamedParamsAndResultActivity.this);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        };
+    }
+}
+```
+
+```java
+ Navigator.customNameWithParams(BaseActivity.this, 21, "some_string", NAMED_WITH_RESULT);
+```
+```java
+Navigator.customNameWithParams(BaseActivity.this, 21, "some_string", NAMED_WITH_RESULT);
+Navigator.customNameWithParams(BaseActivity.this, book);
+```
+```java
+ CustomNameWithParamsResultLoader.CustomNameWithParamsResult result2 = CustomNameWithParamsResultLoader.load(data);
+```
+
+
+
+
+
+
 
