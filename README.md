@@ -1,10 +1,15 @@
 # Navigator
 Navigator code generator for Android.
-This library creates boilerplate code useful to start new activities. 
+This library creates boilerplate code useful to start new activities.
+
 Provides **Navigator** class that keeps all start activity methods with appropriate parameters.
+
 Provides **\*ParamLoader** classes for easy loading parameters from **Intents**
-Provides **\*ResultFiller** classes for easy returning values from **Activities**
+
+Provides **\*ResultFiller** classes for easy returning values from **Activities** by filling **Intents**
+
 Provides **\*ResultLoader** classes for easy loading results from **Activities**
+
 Provides **\*Result** classes for keeping results from **Activities**
 
 ##I want to:
