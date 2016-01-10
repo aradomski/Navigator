@@ -24,15 +24,48 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 
+import pl.edu.radomski.navigator.Navigable;
+
 /**
  * Created by adam on 8/23/15.
  */
 public class CodeGeneratorHelper {
-    public static String buildMethodName(String annotatedClassName) {
+    public static String buildMethodName(String annotatedClassName, Navigable navigable) {
+        if (!StringUtils.isEmpty(navigable.name())) {
+            return navigable.name();
+        }
         char c[] = annotatedClassName.toCharArray();
         c[0] = Character.toLowerCase(c[0]);
         annotatedClassName = new String(c);
         return annotatedClassName;
+    }
+
+    public static String getParamLoaderClassName(String annotatedClassName, Navigable navigable) {
+        if (!StringUtils.isEmpty(navigable.name())) {
+            return firstLetterToUpperCase(navigable.name()) + "ParamLoader";
+        }
+        return annotatedClassName + "ParamLoader";
+    }
+
+    public static String getResultFillerClassName(String annotatedClassName, Navigable navigable) {
+        if (!StringUtils.isEmpty(navigable.name())) {
+            return firstLetterToUpperCase(navigable.name()) + "ResultFiller";
+        }
+        return annotatedClassName + "ResultFiller";
+    }
+
+    public static String getResultLoaderClassName(String annotatedClassName, Navigable navigable) {
+        if (!StringUtils.isEmpty(navigable.name())) {
+            return firstLetterToUpperCase(navigable.name()) + "ResultLoader";
+        }
+        return annotatedClassName + "ResultLoader";
+    }
+
+    public static String getResultClassName(String annotatedClassName, String group, Navigable navigable) {
+        if (!StringUtils.isEmpty(navigable.name())) {
+            return firstLetterToUpperCase(navigable.name()) + firstLetterToUpperCase(group) + "Result";
+        }
+        return annotatedClassName + firstLetterToUpperCase(group) + "Result";
     }
 
     public static String firstLetterToUpperCase(String name) {
@@ -84,4 +117,6 @@ public class CodeGeneratorHelper {
         }
         return false;
     }
+
+
 }

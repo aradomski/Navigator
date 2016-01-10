@@ -92,13 +92,8 @@ class NavigatorCodeGenerator {
                 methods.add(handleParamActivity(group, value));
             }
         } else if (value.getParamAnnotatedFields().size() == 0 && value.getResultAnnotatedFields().size() > 0) {
-//            for (String group : value.getResultAnnotatedFields().keySet()) {
             methods.add(handleResultActivity(value));
-//            }
         } else if (value.getParamAnnotatedFields().size() > 0 && value.getResultAnnotatedFields().size() > 0) {
-//            for (String group : value.getResultAnnotatedFields().keySet()) {
-//                methods.add(handleResultActivity( value));
-//            }
             for (String group : value.getParamAnnotatedFields().keySet()) {
                 methods.add(handleParamActivity(group, value));
             }
@@ -117,7 +112,7 @@ class NavigatorCodeGenerator {
         ArrayTypeName integerArray = ArrayTypeName.of(ClassName.get(Integer.class));
 
 
-        String annotatedClassName = CodeGeneratorHelper.buildMethodName(value.getAnnotatedClassName() + "ForResult");
+        String annotatedClassName = CodeGeneratorHelper.buildMethodName(value.getAnnotatedClassName() + "ForResult", value.getNavigableAnnotation());
         MethodSpec.Builder builder = MethodSpec.methodBuilder(annotatedClassName)
                 .addParameter(activityTypeName, "activity", Modifier.FINAL)
                 .addParameter(TypeName.INT, "requestCode", Modifier.FINAL)
@@ -149,7 +144,7 @@ class NavigatorCodeGenerator {
         if (forResultCounter > 0) {
             methodName += "ForResult";
         }
-        String annotatedClassName = CodeGeneratorHelper.buildMethodName(methodName);
+        String annotatedClassName = CodeGeneratorHelper.buildMethodName(methodName,value.getNavigableAnnotation());
         MethodSpec.Builder builder = MethodSpec.methodBuilder(annotatedClassName);
         builder.addParameter(activityTypeName, "activity", Modifier.FINAL);
         TypeName paramTypeName;
@@ -200,7 +195,7 @@ class NavigatorCodeGenerator {
         ArrayTypeName integerArray = ArrayTypeName.of(ClassName.get(Integer.class));
 
 
-        String annotatedClassName = CodeGeneratorHelper.buildMethodName(value.getAnnotatedClassName());
+        String annotatedClassName = CodeGeneratorHelper.buildMethodName(value.getAnnotatedClassName(),value.getNavigableAnnotation());
         MethodSpec.Builder builder = MethodSpec.methodBuilder(annotatedClassName)
                 .addParameter(activityTypeName, "activity", Modifier.FINAL)
                 .addParameter(integerArray, "flags", Modifier.FINAL)

@@ -34,6 +34,7 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.VariableElement;
 
 import pl.edu.radomski.navigator.navigable.NavigableAnnotatedClass;
+import pl.edu.radomski.navigator.utils.CodeGeneratorHelper;
 
 import static com.squareup.javapoet.JavaFile.builder;
 
@@ -48,7 +49,8 @@ public class ResultFillerCodeGenerator {
     }
 
     public void createResultFiller(NavigableAnnotatedClass value) {
-        TypeSpec.Builder builder = TypeSpec.classBuilder(value.getAnnotatedClassName() + "ResultFiller").addModifiers(Modifier.FINAL);
+        String resultFillerClassName = CodeGeneratorHelper.getResultFillerClassName(value.getAnnotatedClassName(), value.getNavigableAnnotation());
+        TypeSpec.Builder builder = TypeSpec.classBuilder(resultFillerClassName).addModifiers(Modifier.FINAL);
 
         TypeName intentTypeName = pl.edu.radomski.navigator.utils.AndroidSpecificClassProvider.getIntentTypeName();
 

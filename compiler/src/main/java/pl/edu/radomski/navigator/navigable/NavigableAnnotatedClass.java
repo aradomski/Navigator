@@ -79,7 +79,7 @@ public class NavigableAnnotatedClass {
 
         navigableAnnotatedClass.paramAnnotatedFields = paramAnnotatedFields;
         navigableAnnotatedClass.resultAnnotatedFields = resultAnnotatedFields;
-
+        navigableAnnotatedClass.navigableAnnotation = annotation;
 
         return navigableAnnotatedClass;
     }
@@ -89,6 +89,8 @@ public class NavigableAnnotatedClass {
     private final String annotatedClassName;
     private final TypeElement typeElement;
     private final String group;
+    private Navigable navigableAnnotation;
+
 
     public NavigableAnnotatedClass(TypeElement typeElement, String group) {
         this.annotatedClassName = typeElement.getSimpleName().toString();
@@ -115,5 +117,9 @@ public class NavigableAnnotatedClass {
 
     public String getGroup() {
         return group;
+    }
+
+    public Navigable getNavigableAnnotation() {
+        return navigableAnnotation;
     }
 }

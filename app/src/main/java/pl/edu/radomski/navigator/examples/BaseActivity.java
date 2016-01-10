@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import pl.edu.radomski.navigator.Navigable;
 import pl.edu.radomski.navigator.R;
 import pl.edu.radomski.navigator.params.Book;
 import pl.edu.radomski.navigator.params.Person;
@@ -44,6 +45,7 @@ public class BaseActivity extends Activity {
     public static final int GROUPED_RESULTS_FOR_RESULT_ACTIVITY2 = 5006;
     public static final int GROUPED_RESULTS_FOR_RESULT_ACTIVITY3 = 5007;
     public static final int WITH_RESULT_OPTION_ACTIVITY = 5008;
+    public static final int NAMED_WITH_RESULT = 5009;
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -101,6 +103,15 @@ public class BaseActivity extends Activity {
                 case R.id.with_result_option_activity2:
                     Navigator.activityWithResultOptionSecondGroup(BaseActivity.this, 123.53, 25);
                     break;
+                case R.id.simple_named_activity:
+                    Navigator.customName(BaseActivity.this);
+                    break;
+                case R.id.params_result_named_activity:
+                    Navigator.customNameWithParams(BaseActivity.this, 21, "some_string", NAMED_WITH_RESULT);
+                    break;
+                case R.id.params_result_named_activity_2:
+                    Navigator.customNameWithParams(BaseActivity.this, book);
+                    break;
             }
         }
     };
@@ -124,6 +135,9 @@ public class BaseActivity extends Activity {
     private Button groupedActivity;
     private Button withResultOption1;
     private Button withResultOption2;
+    private Button simpleNamedActivity;
+    private Button paramsResultNamedActivity;
+    private Button paramsResultNamedActivity2;
 
 
     @Override
@@ -186,6 +200,14 @@ public class BaseActivity extends Activity {
         withResultOption2 = (Button) findViewById(R.id.with_result_option_activity2);
         withResultOption2.setOnClickListener(onClickListener);
 
+        simpleNamedActivity = (Button) findViewById(R.id.simple_named_activity);
+        simpleNamedActivity.setOnClickListener(onClickListener);
+
+        paramsResultNamedActivity = (Button) findViewById(R.id.params_result_named_activity);
+        paramsResultNamedActivity.setOnClickListener(onClickListener);
+
+        paramsResultNamedActivity2 = (Button) findViewById(R.id.params_result_named_activity_2);
+        paramsResultNamedActivity2.setOnClickListener(onClickListener);
     }
 
     protected View.OnClickListener getOnCloseClickListener() {
@@ -228,6 +250,9 @@ public class BaseActivity extends Activity {
             case WITH_RESULT_OPTION_ACTIVITY:
                 ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
                 textViewResult.setText(result8.stringResult + "\n" + result8.bookResult);
+                break;
+            case NAMED_WITH_RESULT:
+                CustomNameWithParamsResultLoader.CustomNameWithParamsResult result2 = CustomNameWithParamsResultLoader.load(data);
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -309,3 +334,4 @@ public class BaseActivity extends Activity {
                 , "bbbbbb");
     }
 }
+

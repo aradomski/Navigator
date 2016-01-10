@@ -26,6 +26,7 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
+import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,7 +54,9 @@ public class ParamLoaderCodeGenerator {
     }
 
     public void createParamLoader(NavigableAnnotatedClass value) {
-        TypeSpec.Builder builder = TypeSpec.classBuilder(value.getAnnotatedClassName() + "ParamLoader").addModifiers(Modifier.FINAL);
+
+        String paramLoaderClassName = CodeGeneratorHelper.getParamLoaderClassName(value.getAnnotatedClassName(), value.getNavigableAnnotation());
+        TypeSpec.Builder builder = TypeSpec.classBuilder(paramLoaderClassName).addModifiers(Modifier.FINAL);
         TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
 
         String qualifiedName = value.getTypeElement().getQualifiedName().toString();

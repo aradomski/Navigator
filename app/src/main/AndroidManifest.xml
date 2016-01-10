@@ -44,6 +44,8 @@
         <activity android:name=".examples.AllParamsActivity" />
         <activity android:name=".examples.GroupedActivity" />
         <activity android:name=".examples.ActivityWithResultOption" />
+        <activity android:name=".examples.SimpleNamedMethodActivity" />
+        <activity android:name=".examples.NamedParamsAndResultActivity" />
     </application>
 
 </manifest>

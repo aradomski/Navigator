@@ -143,6 +143,22 @@
             android:text="With result option Activity 2" />
 
         <Button
+            android:id="@+id/simple_named_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Simple Named Activity" />
+        <Button
+            android:id="@+id/params_result_named_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Named with params and result" />
+        <Button
+            android:id="@+id/params_result_named_activity_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Named with params without result" />
+
+        <Button
             android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

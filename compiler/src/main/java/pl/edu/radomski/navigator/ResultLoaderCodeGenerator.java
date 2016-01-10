@@ -55,7 +55,7 @@ public class ResultLoaderCodeGenerator {
     }
 
     public void createResultLoader(NavigableAnnotatedClass value) {
-        String resultLoaderClassName = value.getAnnotatedClassName() + "ResultLoader";
+        String resultLoaderClassName = CodeGeneratorHelper.getResultLoaderClassName(value.getAnnotatedClassName(), value.getNavigableAnnotation());
         TypeSpec.Builder builder = TypeSpec.classBuilder(resultLoaderClassName).addModifiers(Modifier.FINAL, Modifier.PUBLIC);
         TypeName intentTypeName = AndroidSpecificClassProvider.getIntentTypeName();
 
@@ -75,7 +75,7 @@ public class ResultLoaderCodeGenerator {
 
             variableElements = stringListEntry.getValue();
 
-            resultClass = generateResultClass(value.getAnnotatedClassName(), group, variableElements);
+            resultClass = generateResultClass(value.getAnnotatedClassName(), group, variableElements, value);
             builder.addType(resultClass);
 
 
@@ -240,9 +240,9 @@ public class ResultLoaderCodeGenerator {
         }
     }
 
-    private TypeSpec generateResultClass(String annotatedClassName, String group, List<VariableElement> variableElements) {
-        TypeSpec.Builder resultClassBuilder = TypeSpec.classBuilder(annotatedClassName + group + "Result").addModifiers(Modifier.FINAL, Modifier.PUBLIC, Modifier.STATIC);
-
+    private TypeSpec generateResultClass(String annotatedClassName, String group, List<VariableElement> variableElements, NavigableAnnotatedClass value) {
+        TypeSpec.Builder resultClassBuilder = TypeSpec.classBuilder(CodeGeneratorHelper.getResultClassName(annotatedClassName, group, value.getNavigableAnnotation()))
+                .addModifiers(Modifier.FINAL, Modifier.PUBLIC, Modifier.STATIC);
 
         for (VariableElement variableElement : variableElements) {
             resultClassBuilder.addField(TypeName.get(variableElement.asType()), variableElement.getSimpleName().toString(), Modifier.PUBLIC);

@@ -33,4 +33,6 @@ import java.lang.annotation.Target;
 
 public @interface Navigable {
     String group() default "";
+
+    String name() default "";
 }
