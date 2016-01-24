@@ -65,7 +65,7 @@ dependencies {
 group = 'pl.edu.radomski'
 archivesBaseName = 'navigator-compiler'
 sourceCompatibility = 1.7
-version = '1.0.0'
+version = '1.0.1'
 
 
 task javadocJar(type: Jar) {
