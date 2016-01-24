@@ -222,38 +222,41 @@ public class BaseActivity extends Activity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case PARAMS_FOR_RESULT_ACTIVITY:
-                ParamsForResultActivityResultLoader.ParamsForResultActivityResult result1 = ParamsForResultActivityResultLoader.load(data);
-                textViewResult.setText(result1.stringResult);
-                break;
-            case GROUPED_FOR_RESULT_ACTIVITY:
-                GroupedParamsForResultActivityResultLoader.GroupedParamsForResultActivityResult result = GroupedParamsForResultActivityResultLoader.load(data);
-                textViewResult.setText(result.stringResult);
-                break;
-            case FOR_RESULT_ACTIVITY:
-                ForResultActivityResultLoader.ForResultActivityResult result3 = ForResultActivityResultLoader.load(data);
-                textViewResult.setText(result3.stringResult + "\n" + result3.book);
-                break;
-            case GROUPED_RESULTS_FOR_RESULT_ACTIVITY1:
-                GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivityResult result4 = GroupedResultsForResultActivityResultLoader.load(data);
-                textViewResult.setText(result4.stringResult);
-                break;
-            case GROUPED_RESULTS_FOR_RESULT_ACTIVITY2:
-                GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivityFirstGroupResult result5 = GroupedResultsForResultActivityResultLoader.loadFirstGroup(data);
-                textViewResult.setText(result5.booleanResult + "");
-                break;
-            case GROUPED_RESULTS_FOR_RESULT_ACTIVITY3:
-                GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivitySecondGroupResult result7 = GroupedResultsForResultActivityResultLoader.loadSecondGroup(data);
-                textViewResult.setText(result7.integerResult + "\n" + result7.doubleResult);
-                break;
-            case WITH_RESULT_OPTION_ACTIVITY:
-                ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
-                textViewResult.setText(result8.stringResult + "\n" + result8.bookResult);
-                break;
-            case NAMED_WITH_RESULT:
-                CustomNameWithParamsResultLoader.CustomNameWithParamsResult result2 = CustomNameWithParamsResultLoader.load(data);
-                break;
+        if (data != null) {
+            switch (requestCode) {
+                case PARAMS_FOR_RESULT_ACTIVITY:
+                    ParamsForResultActivityResultLoader.ParamsForResultActivityResult result1 = ParamsForResultActivityResultLoader.load(data);
+                    textViewResult.setText(result1.stringResult);
+                    break;
+                case GROUPED_FOR_RESULT_ACTIVITY:
+                    GroupedParamsForResultActivityResultLoader.GroupedParamsForResultActivityResult result = GroupedParamsForResultActivityResultLoader.load(data);
+                    textViewResult.setText(result.stringResult);
+                    break;
+                case FOR_RESULT_ACTIVITY:
+                    ForResultActivityResultLoader.ForResultActivityResult result3 = ForResultActivityResultLoader.load(data);
+                    textViewResult.setText(result3.stringResult + "\n" + result3.book);
+                    break;
+                case GROUPED_RESULTS_FOR_RESULT_ACTIVITY1:
+                    GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivityResult result4 = GroupedResultsForResultActivityResultLoader.load(data);
+                    textViewResult.setText(result4.stringResult);
+                    break;
+                case GROUPED_RESULTS_FOR_RESULT_ACTIVITY2:
+                    GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivityFirstGroupResult result5 = GroupedResultsForResultActivityResultLoader.loadFirstGroup(data);
+                    textViewResult.setText(result5.booleanResult + "");
+                    break;
+                case GROUPED_RESULTS_FOR_RESULT_ACTIVITY3:
+                    GroupedResultsForResultActivityResultLoader.GroupedResultsForResultActivitySecondGroupResult result7 = GroupedResultsForResultActivityResultLoader.loadSecondGroup(data);
+                    textViewResult.setText(result7.integerResult + "\n" + result7.doubleResult);
+                    break;
+                case WITH_RESULT_OPTION_ACTIVITY:
+                    ActivityWithResultOptionResultLoader.ActivityWithResultOptionFirstResultGroupResult result8 = ActivityWithResultOptionResultLoader.loadFirstResultGroup(data);
+                    textViewResult.setText(result8.stringResult + "\n" + result8.bookResult);
+                    break;
+                case NAMED_WITH_RESULT:
+                    CustomNameWithParamsResultLoader.CustomNameWithParamsResult result2 = CustomNameWithParamsResultLoader.load(data);
+                    textViewResult.setText(result2.stringResult);
+                    break;
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
