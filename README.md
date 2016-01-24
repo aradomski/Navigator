@@ -22,8 +22,11 @@ In project build.gradle file add:
 classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 ```
 
-and in app module add:
-
+On top of module build.gradle file add:
+```
+apply plugin: 'com.neenbedankt.android-apt'
+```
+then add:
 ```
  compile 'pl.edu.radomski:navigator-annotations:1.0.0'
  provided 'pl.edu.radomski:navigator-compiler:1.0.0'
