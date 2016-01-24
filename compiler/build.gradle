@@ -19,6 +19,8 @@
  */
 
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 sourceCompatibility = JavaVersion.VERSION_1_7
 targetCompatibility = JavaVersion.VERSION_1_7
@@ -59,3 +61,76 @@ dependencies {
 
 
 
+
+group = 'pl.edu.radomski'
+archivesBaseName = 'navigator-compiler'
+sourceCompatibility = 1.7
+version = '1.0.0'
+
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+artifacts {
+    archives javadocJar, sourcesJar
+}
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Navigator compiler', 'Implementation-Version': version
+    }
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Navigator compiler'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Navigator compiler'
+                url 'https://github.com/aradomski/Navigator'
+
+                scm {
+                    connection 'scm:git:https://github.com/aradomski/Navigator.git'
+                    developerConnection 'scm:git:https://github.com/aradomski/Navigator.git'
+                    url 'https://github.com/aradomski/Navigator.git'
+                }
+
+                licenses {
+                    license {
+                        name 'LGPL-2.1'
+                        url 'http://opensource.org/licenses/LGPL-2.1'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'pl.edu.radomski'
+                        name 'Adam Radomski'
+                        email 'ahradomski@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
