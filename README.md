@@ -14,7 +14,30 @@ Provides **\*Result** classes for keeping results from **Activities**
 
 ##I want to:
 
-### Include library in my project
+### Get library from maven and include it in my project
+
+In project build.gradle file add:
+
+```
+classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+```
+
+and in app module add:
+
+```
+ compile 'pl.edu.radomski:navigator-annotations:1.0.0'
+ provided 'pl.edu.radomski:navigator-compiler:1.0.0'
+``` 
+in **dependencies**
+and 
+```
+apt {
+    processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
+}
+```
+as separate method
+
+### Include library in my project (as one of modules)
 
 [App build.gradle](app/build.gradle)
 
@@ -335,9 +358,6 @@ public class NamedParamsAndResultActivity extends BaseActivity {
 }
 ```
 
-```java
- Navigator.customNameWithParams(BaseActivity.this, 21, "some_string", NAMED_WITH_RESULT);
-```
 ```java
 Navigator.customNameWithParams(BaseActivity.this, 21, "some_string", NAMED_WITH_RESULT);
 Navigator.customNameWithParams(BaseActivity.this, book);
