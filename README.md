@@ -29,37 +29,9 @@ apply plugin: 'com.neenbedankt.android-apt'
 then add:
 ```
  compile 'pl.edu.radomski:navigator-annotations:1.0.0'
- provided 'pl.edu.radomski:navigator-compiler:1.0.0'
+ apt 'pl.edu.radomski:navigator-compiler:1.0.1'
 ``` 
 in **dependencies**
-and 
-```
-apt {
-    processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
-}
-```
-as separate method
-
-### Include library in my project (as one of modules)
-
-[App build.gradle](app/build.gradle)
-
-Crucial lines:
-```
-apply plugin: 'com.neenbedankt.android-apt'
-provided project(':compiler')
-apt {
-  processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
-}
-```
-[Project build.gradle](build.gradle)
-
-Crucial line:
-```
-classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-```
-
-
 
 ### Navigate to simple activity
 
