@@ -18,145 +18,16 @@
   ~ USA
   -->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin">
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
-
-
-        <Button
-            android:id="@+id/simple_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Simple Activity" />
-
-        <Button
-            android:id="@+id/params_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Params Activity" />
-
-        <Button
-            android:id="@+id/grouped_params_activity1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Activity1" />
-
-        <Button
-            android:id="@+id/grouped_params_activity2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Activity2" />
-
-        <Button
-            android:id="@+id/grouped_params_activity3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Activity3" />
-
-        <Button
-            android:id="@+id/params_for_result_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Params for result Activity" />
-
-        <Button
-            android:id="@+id/grouped_params_for_result_activity1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped params for result Activity1" />
-
-        <Button
-            android:id="@+id/grouped_params_for_result_activity2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped params for result Activity2" />
-
-        <Button
-            android:id="@+id/for_result_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="For result Activity" />
-
-        <Button
-            android:id="@+id/grouped_results_for_result_activity1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Results for result Activity1" />
-
-        <Button
-            android:id="@+id/grouped_results_for_result_activity2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Results for result Activity2" />
-
-        <Button
-            android:id="@+id/grouped_results_for_result_activity3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Results for result Activity3" />
-
-        <Button
-            android:id="@+id/all_params_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All params Activity" />
-
-        <Button
-            android:id="@+id/grouped_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Grouped Activity" />
-
-        <Button
-            android:id="@+id/with_result_option_activity1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="With result option Activity 1" />
-
-        <Button
-            android:id="@+id/with_result_option_activity2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="With result option Activity 2" />
-
-        <Button
-            android:id="@+id/simple_named_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Simple Named Activity" />
-        <Button
-            android:id="@+id/params_result_named_activity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Named with params and result" />
-        <Button
-            android:id="@+id/params_result_named_activity_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Named with params without result" />
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/close"
@@ -164,5 +35,157 @@
             android:layout_height="wrap_content"
             android:text="Close" />
 
+
+        <Button
+            android:id="@+id/binding"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data binding test" />
     </LinearLayout>
-</ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_world" />
+
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_world" />
+
+
+            <Button
+                android:id="@+id/simple_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simple Activity" />
+
+            <Button
+                android:id="@+id/params_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Params Activity" />
+
+            <Button
+                android:id="@+id/grouped_params_activity1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Activity1" />
+
+            <Button
+                android:id="@+id/grouped_params_activity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Activity2" />
+
+            <Button
+                android:id="@+id/grouped_params_activity3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Activity3" />
+
+            <Button
+                android:id="@+id/params_for_result_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Params for result Activity" />
+
+            <Button
+                android:id="@+id/grouped_params_for_result_activity1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped params for result Activity1" />
+
+            <Button
+                android:id="@+id/grouped_params_for_result_activity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped params for result Activity2" />
+
+            <Button
+                android:id="@+id/for_result_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For result Activity" />
+
+            <Button
+                android:id="@+id/grouped_results_for_result_activity1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Results for result Activity1" />
+
+            <Button
+                android:id="@+id/grouped_results_for_result_activity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Results for result Activity2" />
+
+            <Button
+                android:id="@+id/grouped_results_for_result_activity3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Results for result Activity3" />
+
+            <Button
+                android:id="@+id/all_params_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All params Activity" />
+
+            <Button
+                android:id="@+id/grouped_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Grouped Activity" />
+
+            <Button
+                android:id="@+id/with_result_option_activity1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="With result option Activity 1" />
+
+            <Button
+                android:id="@+id/with_result_option_activity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="With result option Activity 2" />
+
+            <Button
+                android:id="@+id/simple_named_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Simple Named Activity" />
+
+            <Button
+                android:id="@+id/params_result_named_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Named with params and result" />
+
+            <Button
+                android:id="@+id/params_result_named_activity_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Named with params without result" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

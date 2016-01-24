@@ -26,7 +26,6 @@ import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
-import com.sun.org.apache.bcel.internal.classfile.Code;
 
 import java.io.IOException;
 import java.util.List;

@@ -112,6 +112,9 @@ public class BaseActivity extends Activity {
                 case R.id.params_result_named_activity_2:
                     Navigator.customNameWithParams(BaseActivity.this, book);
                     break;
+                case R.id.binding:
+                    Navigator.dataBindingTestActivity(BaseActivity.this);
+                    break;
             }
         }
     };
@@ -138,6 +141,7 @@ public class BaseActivity extends Activity {
     private Button simpleNamedActivity;
     private Button paramsResultNamedActivity;
     private Button paramsResultNamedActivity2;
+    private Button dataBindingTest;
 
 
     @Override
@@ -208,6 +212,11 @@ public class BaseActivity extends Activity {
 
         paramsResultNamedActivity2 = (Button) findViewById(R.id.params_result_named_activity_2);
         paramsResultNamedActivity2.setOnClickListener(onClickListener);
+
+        dataBindingTest = (Button) findViewById(R.id.binding);
+        dataBindingTest.setOnClickListener(onClickListener);
+
+
     }
 
     protected View.OnClickListener getOnCloseClickListener() {
@@ -337,4 +346,5 @@ public class BaseActivity extends Activity {
                 , "bbbbbb");
     }
 }
+
 
