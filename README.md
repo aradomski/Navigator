@@ -1,9 +1,46 @@
 # Navigator
 Navigator code generator for Android.
+This library creates boilerplate code useful to start new activities.
+
+Provides **Navigator** class that keeps all start activity methods with appropriate parameters.
+
+Provides **\*ParamLoader** classes for easy loading parameters from **Intents**
+
+Provides **\*ResultFiller** classes for easy returning values from **Activities** by filling **Intents**
+
+Provides **\*ResultLoader** classes for easy loading results from **Activities**
+
+Provides **\*Result** classes for keeping results from **Activities**
 
 ##I want to:
 
-### Include library in my project
+### Get library from maven and include it in my project
+
+In project build.gradle file add:
+
+```
+classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+```
+
+On top of module build.gradle file add:
+```
+apply plugin: 'com.neenbedankt.android-apt'
+```
+then add:
+```
+ compile 'pl.edu.radomski:navigator-annotations:1.0.0'
+ provided 'pl.edu.radomski:navigator-compiler:1.0.0'
+``` 
+in **dependencies**
+and 
+```
+apt {
+    processor "pl.edu.radomski.navigator.NavigatorAnnotationProcessor"
+}
+```
+as separate method
+
+### Include library in my project (as one of modules)
 
 [App build.gradle](app/build.gradle)
 
@@ -19,7 +56,7 @@ apt {
 
 Crucial line:
 ```
-classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
+classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 ```
 
 
@@ -288,4 +325,53 @@ public class GroupedActivity extends Activity
 ```java
 Navigator.subgroup.groupedActivity(BaseActivity.this);
 ```
+### Create custom method and support classes name for Activity
+
+```java
+@Navigable(name = "customNameWithParams")
+public class NamedParamsAndResultActivity extends BaseActivity {
+
+    @Param(forResult = true)
+    Integer integerParam;
+    @Param(forResult = true)
+    String stringParam;
+    @Param(group = "OtherGroup")
+    Book parcelableParam;
+
+    @Result
+    String stringResult = "result";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        CustomNameWithParamsParamLoader.load(this);
+    }
+
+    @Override
+    protected View.OnClickListener getOnCloseClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = CustomNameWithParamsResultFiller.fillResult(NamedParamsAndResultActivity.this);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        };
+    }
+}
+```
+
+```java
+Navigator.customNameWithParams(BaseActivity.this, 21, "some_string", NAMED_WITH_RESULT);
+Navigator.customNameWithParams(BaseActivity.this, book);
+```
+```java
+ CustomNameWithParamsResultLoader.CustomNameWithParamsResult result2 = CustomNameWithParamsResultLoader.load(data);
+```
+
+
+
+
+
+
 
