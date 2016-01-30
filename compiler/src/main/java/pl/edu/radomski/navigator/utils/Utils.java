@@ -20,9 +20,17 @@
 
 package pl.edu.radomski.navigator.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.lang.model.element.PackageElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
+
+import pl.edu.radomski.navigator.exceptions.NoPackageNameException;
+import pl.edu.radomski.navigator.navigable.NavigableAnnotatedClass;
+import pl.edu.radomski.navigator.utils.tuple.Tuple;
+import pl.edu.radomski.navigator.utils.tuple.Tuple2;
 
 public final class Utils {
 
@@ -30,12 +38,18 @@ public final class Utils {
         // no instances
     }
 
-    public static String getPackageName(Elements elementUtils, TypeElement type)
-            throws pl.edu.radomski.navigator.exceptions.NoPackageNameException {
-        PackageElement pkg = elementUtils.getPackageOf(type);
-        if (pkg.isUnnamed()) {
-            throw new pl.edu.radomski.navigator.exceptions.NoPackageNameException(type);
+    public static String getPackageName(Elements elementUtils, List<NavigableAnnotatedClass> type) throws NoPackageNameException {
+        List<String> packageNames = new ArrayList<>();
+        PackageElement packageElement;
+        for (NavigableAnnotatedClass navigableAnnotatedClass : type) {
+            packageElement = elementUtils.getPackageOf(navigableAnnotatedClass.getTypeElement());
+            if (!packageElement.isUnnamed()) {
+                packageNames.add(packageElement.getQualifiedName().toString());
+            }
         }
-        return pkg.getQualifiedName().toString();
+        return StringUtils.longestCommonSubstring(packageNames);
+
     }
+
+
 }

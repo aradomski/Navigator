@@ -30,6 +30,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import pl.edu.radomski.navigator.Navigable;
+import pl.edu.radomski.navigator.Navigator;
 import pl.edu.radomski.navigator.R;
 import pl.edu.radomski.navigator.params.Book;
 import pl.edu.radomski.navigator.params.Person;
@@ -112,6 +113,9 @@ public class BaseActivity extends Activity {
                 case R.id.params_result_named_activity_2:
                     Navigator.customNameWithParams(BaseActivity.this, book);
                     break;
+                case R.id.activity_in_other_package:
+                    Navigator.activityInOtherPackage(BaseActivity.this);
+                    break;
             }
         }
     };
@@ -138,6 +142,7 @@ public class BaseActivity extends Activity {
     private Button simpleNamedActivity;
     private Button paramsResultNamedActivity;
     private Button paramsResultNamedActivity2;
+    private Button activityInOtherPackage;
 
 
     @Override
@@ -208,6 +213,10 @@ public class BaseActivity extends Activity {
 
         paramsResultNamedActivity2 = (Button) findViewById(R.id.params_result_named_activity_2);
         paramsResultNamedActivity2.setOnClickListener(onClickListener);
+
+
+        activityInOtherPackage = (Button) findViewById(R.id.activity_in_other_package);
+        activityInOtherPackage.setOnClickListener(onClickListener);
     }
 
     protected View.OnClickListener getOnCloseClickListener() {

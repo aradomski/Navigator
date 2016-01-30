@@ -75,7 +75,8 @@ class NavigatorCodeGenerator {
         }
         TypeSpec generatedClass = builder.build();
 
-        String packageName = Utils.getPackageName(processingEnv.getElementUtils(), navigableAnnotatedClassList.get(0).getTypeElement());
+        String packageName = Utils.getPackageName(processingEnv.getElementUtils(), navigableAnnotatedClassList);
+        System.out.println("generating in package: " + packageName);
 
         JavaFile javaFile;
         javaFile = builder(packageName, generatedClass).build();
@@ -144,7 +145,7 @@ class NavigatorCodeGenerator {
         if (forResultCounter > 0) {
             methodName += "ForResult";
         }
-        String annotatedClassName = CodeGeneratorHelper.buildMethodName(methodName,value.getNavigableAnnotation());
+        String annotatedClassName = CodeGeneratorHelper.buildMethodName(methodName, value.getNavigableAnnotation());
         MethodSpec.Builder builder = MethodSpec.methodBuilder(annotatedClassName);
         builder.addParameter(activityTypeName, "activity", Modifier.FINAL);
         TypeName paramTypeName;
@@ -195,7 +196,7 @@ class NavigatorCodeGenerator {
         ArrayTypeName integerArray = ArrayTypeName.of(ClassName.get(Integer.class));
 
 
-        String annotatedClassName = CodeGeneratorHelper.buildMethodName(value.getAnnotatedClassName(),value.getNavigableAnnotation());
+        String annotatedClassName = CodeGeneratorHelper.buildMethodName(value.getAnnotatedClassName(), value.getNavigableAnnotation());
         MethodSpec.Builder builder = MethodSpec.methodBuilder(annotatedClassName)
                 .addParameter(activityTypeName, "activity", Modifier.FINAL)
                 .addParameter(integerArray, "flags", Modifier.FINAL)

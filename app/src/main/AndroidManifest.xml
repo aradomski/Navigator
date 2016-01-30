@@ -46,6 +46,7 @@
         <activity android:name=".examples.ActivityWithResultOption" />
         <activity android:name=".examples.SimpleNamedMethodActivity" />
         <activity android:name=".examples.NamedParamsAndResultActivity" />
+        <activity android:name=".anotherPackage.ActivityInOtherPackage" />
     </application>
 
 </manifest>
