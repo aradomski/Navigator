@@ -29,7 +29,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 then add:
 ```
  compile 'pl.edu.radomski:navigator-annotations:1.0.0'
- apt 'pl.edu.radomski:navigator-compiler:1.0.1'
+ apt 'pl.edu.radomski:navigator-compiler:1.0.2'
 ``` 
 in **dependencies**
 
