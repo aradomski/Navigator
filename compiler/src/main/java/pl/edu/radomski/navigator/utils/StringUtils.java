@@ -38,7 +38,11 @@ public final class StringUtils {
 
     public static String longestCommonSubstring(List<String> values) {
         TreeMap<Integer, Tuple2<String, String>> map = new TreeMap<>();
-
+        if (values.size() == 0) {
+            return "";
+        } else if (values.size() == 1) {
+            return values.get(0);
+        }
 
         for (int i = 0; i < values.size() - 1; i++) {
             for (int j = i + 1; j < values.size(); j++) {
@@ -47,7 +51,11 @@ public final class StringUtils {
         }
 
         Map.Entry<Integer, Tuple2<String, String>> integerTuple2Entry = map.firstEntry();
-        return integerTuple2Entry.getValue().first.substring(0, integerTuple2Entry.getKey() - 1);
+        int lastIndex = integerTuple2Entry.getKey();
+        if (integerTuple2Entry.getValue().first.substring(0, lastIndex).endsWith(".")) {
+            lastIndex--;
+        }
+        return integerTuple2Entry.getValue().first.substring(0, lastIndex);
     }
 
     // Source: http://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Longest_common_substring
