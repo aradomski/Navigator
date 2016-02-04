@@ -1,4 +1,7 @@
-# Navigator
+# Navigator 
+##### navigator-compiler [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-compiler/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-compiler)
+##### navigator-annotations [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-annotations)
+
 Navigator code generator for Android.
 This library creates boilerplate code useful to start new activities.
 
@@ -29,7 +32,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 then add:
 ```
  compile 'pl.edu.radomski:navigator-annotations:1.0.0'
- apt 'pl.edu.radomski:navigator-compiler:1.0.2'
+ apt 'pl.edu.radomski:navigator-compiler:1.0.3'
 ``` 
 in **dependencies**
 
