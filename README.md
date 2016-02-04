@@ -1,7 +1,4 @@
 # Navigator 
-##### navigator-compiler [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-compiler/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-compiler)
-##### navigator-annotations [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-annotations)
-
 Navigator code generator for Android.
 This library creates boilerplate code useful to start new activities.
 
@@ -18,7 +15,8 @@ Provides **\*Result** classes for keeping results from **Activities**
 ##I want to:
 
 ### Get library from maven and include it in my project
-
+#### navigator-compiler [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-compiler/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-compiler)
+#### navigator-annotations [![Maven Central](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/pl.edu.radomski/navigator-annotations)
 In project build.gradle file add:
 
 ```
